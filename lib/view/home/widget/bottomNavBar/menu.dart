@@ -1,5 +1,5 @@
 import 'package:city_app/utils/componnents.dart';
-import 'package:city_app/view/news_info.dart';
+import 'package:city_app/view/home/widget/bottomNavBar/menu/news_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';

@@ -1,8 +1,6 @@
 import 'package:city_app/controller/controller.dart';
 import 'package:city_app/utils/constants.dart';
-import 'package:city_app/view/home/widget/bottomNavBar/all_places.dart';
-import 'package:city_app/view/home/widget/bottomNavBar/favourates.dart';
-import 'package:city_app/view/home/widget/bottomNavBar/menu.dart';
+
 import 'package:city_app/view/home/widget/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';

@@ -13,7 +13,7 @@ class Controller extends GetxController {
     AllPlacesScreen(),
     FavouriteScreen(),
     SearchBar(),
-    AllPlacesScreenMap(),
+    MapScreen(),
     MenuScreen(),
   ];
   List<String> titles = ['All Places', 'Favorites', 'Search', 'Map', 'Menu'];
