@@ -3,18 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+// Import carousel_slider package
 
-class MapScreen extends StatefulWidget {
+class MapScreen8 extends StatefulWidget {
   @override
   _MapScreenState createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _MapScreenState extends State<MapScreen8> {
   MapController mapController = MapController();
   Location location = Location();
   LatLng userLocation = LatLng(0.0, 0.0);
   List<Marker> markers = [];
   List<LatLng> polygonCoordinates = [];
+  double zoomLevel = 15.0;
+  double rotationAngle = 0.0;
 
   @override
   void initState() {
@@ -28,31 +32,32 @@ class _MapScreenState extends State<MapScreen> {
         userLocation = LatLng(locationData.latitude!, locationData.longitude!);
         markers = [
           Marker(
-              width: 80.0,
-              height: 80.0,
-              point: userLocation,
-              child: Container(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Icon(
-                      Icons.circle_outlined,
-                      size: 40,
-                      color: Colors.blue.withOpacity(0.5),
-                    ),
-                    Icon(
-                      Icons.circle,
-                      size: 20,
-                      color: Colors.white,
-                    ),
-                    Icon(
-                      Icons.circle,
-                      size: 10,
-                      color: Colors.blue,
-                    ),
-                  ],
-                ),
-              )),
+            width: 80.0,
+            height: 80.0,
+            point: userLocation,
+            child: Container(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Icon(
+                    Icons.circle_outlined,
+                    size: 40,
+                    color: Colors.blue.withOpacity(0.5),
+                  ),
+                  Icon(
+                    Icons.circle,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                  Icon(
+                    Icons.circle,
+                    size: 10,
+                    color: Colors.blue,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ];
 
         polygonCoordinates = [
@@ -63,7 +68,14 @@ class _MapScreenState extends State<MapScreen> {
         ];
       });
 
-      mapController.moveAndRotate(userLocation, 15, 90);
+      mapController.moveAndRotate(userLocation, zoomLevel, rotationAngle);
+    });
+  }
+
+  void _toggleRotation() {
+    setState(() {
+      rotationAngle = rotationAngle == 0.0 ? 45.0 : 0.0;
+      mapController.moveAndRotate(userLocation, zoomLevel, rotationAngle);
     });
   }
 
@@ -97,34 +109,88 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FlutterMap(
+      floatingActionButton: FloatingActionButton(
+          onPressed: _toggleRotation, child: Icon(Icons.rotate_right_outlined)),
+      body: Column(
         children: [
-          TileLayer(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: ['a', 'b', 'c'],
-          ),
-          MarkerLayer(
-            markers: getMarker(),
-            rotate: true,
-          ),
-          PolygonLayer(
-            polygons: [
-              Polygon(
-                points: polygonCoordinates,
-                borderStrokeWidth: 2,
-                borderColor: Colors.blue,
+          Expanded(
+            child: FlutterMap(
+              children: [
+                TileLayer(
+                  urlTemplate:
+                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                  subdomains: ['a', 'b', 'c'],
+                ),
+                MarkerLayer(
+                  markers: getMarker(),
+                  rotate: true,
+                ),
+                PolygonLayer(
+                  polygons: [
+                    Polygon(
+                      points: polygonCoordinates,
+                      borderStrokeWidth: 2,
+                      borderColor: Colors.blue,
+                    ),
+                  ],
+                ),
+              ],
+              options: MapOptions(
+                onTap: (p, pl) {
+                  _onMarkerTapped(pl as LatLng, MapPosition());
+                },
+                initialCenter: userLocation,
+                initialZoom: zoomLevel,
+                initialRotation: rotationAngle,
               ),
-            ],
+              mapController: mapController,
+            ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: CarouselSlider(
+              items: [1, 2, 3, 4, 5].map((i) {
+                // Replace with your items
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: Image.asset(
+                            'assets/images/p.jpeg',
+                            scale: 5,
+                          )), // Replace 'your_image.png' with the image path
+                          SizedBox(height: 10), // Adjust the spacing as needed
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                'Item $i',
+                                style: TextStyle(fontSize: 16.0),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+              options: CarouselOptions(
+                aspectRatio: 70 / 7,
+                viewportFraction: 1,
+                autoPlay: true,
+              ),
+            ),
+          )
         ],
-        options: MapOptions(
-          onTap: (p, pl) {
-            _onMarkerTapped(pl as LatLng, p as MapPosition);
-          },
-          initialCenter: userLocation,
-          initialZoom: 20,
-        ),
-        mapController: mapController,
       ),
     );
   }
