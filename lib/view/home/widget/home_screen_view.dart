@@ -31,17 +31,14 @@ class HomeScreenView extends GetView<Controller> {
           )
         ],
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(left: 70, top: 20),
-        child: FloatingActionButton(
-          backgroundColor: KmainColor,
-          onPressed: () {
-            Get.to(SearchBar());
-          },
-          child: Icon(
-            Icons.search,
-            size: 40.0,
-          ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: KmainColor,
+        onPressed: () {
+          Get.to(SearchBar());
+        },
+        child: Icon(
+          Icons.search,
+          size: 40.0,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -52,14 +49,16 @@ class HomeScreenView extends GetView<Controller> {
             onTap: (index) {
               controller.currentIndex.value = index;
             },
-            items: const [
+            items: [
               BottomNavigationBarItem(
                   icon: Icon(Icons.location_city_outlined),
                   label: 'All Places'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.favorite), label: 'Favorites'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.search), label: 'Search'),
+                icon: SizedBox.shrink(), // Empty SizedBox for the icon
+                label: '',
+              ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.place), label: 'All Map'),
               BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'Menu'),
