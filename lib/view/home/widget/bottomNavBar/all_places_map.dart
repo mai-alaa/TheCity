@@ -1,4 +1,5 @@
 import 'package:city_app/model/model.dart';
+import 'package:city_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:location/location.dart';
@@ -110,7 +111,11 @@ class _MapScreenState extends State<MapScreen8> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          onPressed: _toggleRotation, child: Icon(Icons.rotate_right_outlined)),
+          backgroundColor: KmainColor,
+          onPressed: _toggleRotation,
+          child: Icon(
+            Icons.rotate_right_outlined,
+          )),
       body: Column(
         children: [
           Expanded(
@@ -130,7 +135,7 @@ class _MapScreenState extends State<MapScreen8> {
                     Polygon(
                       points: polygonCoordinates,
                       borderStrokeWidth: 2,
-                      borderColor: Colors.blue,
+                      borderColor: KmainColor,
                     ),
                   ],
                 ),
