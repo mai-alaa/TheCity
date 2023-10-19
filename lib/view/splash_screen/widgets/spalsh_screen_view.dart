@@ -1,3 +1,4 @@
+import 'package:city_app/controller/controller.dart';
 import 'package:city_app/view/home/home_screen.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SplashScreenView extends StatefulWidget {
-  const SplashScreenView({Key? key}) : super(key: key);
+  SplashScreenView({Key? key}) : super(key: key);
 
   @override
   State<SplashScreenView> createState() => _SplashScreenViewState();

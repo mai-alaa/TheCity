@@ -1,4 +1,5 @@
 import 'package:city_app/utils/constants.dart';
+import 'package:city_app/view/screen_three.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,37 +21,42 @@ class NewsInfoPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: 20,
         itemBuilder: (context, int index) {
-          return Card(
-            elevation: 10,
-            shadowColor: Colors.black,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 200,
-                  child: Image.network(
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Palestine.svg/800px-Flag_of_Palestine.svg.png',
-                    fit: BoxFit.fill,
+          return GestureDetector(
+            onTap: () {
+              Get.to(() => Screen3());
+            },
+            child: Card(
+              elevation: 10,
+              shadowColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 200,
+                    child: Image.network(
+                      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Palestine.svg/800px-Flag_of_Palestine.svg.png',
+                      fit: BoxFit.fill,
+                    ),
                   ),
-                ),
-                Text(
-                  'Free Palestine',
-                  style: TextStyle(
-                    color: KmainColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    'Free Palestine',
+                    style: TextStyle(
+                      color: KmainColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textDirection: TextDirection.rtl,
                   ),
-                  textDirection: TextDirection.rtl,
-                ),
-                Text(
-                  'God Save Palestine ',
-                  style: TextStyle(fontSize: 15, color: Colors.grey),
-                  textDirection: TextDirection.rtl,
-                ),
-              ],
+                  Text(
+                    'God Save Palestine ',
+                    style: TextStyle(fontSize: 15, color: Colors.grey),
+                    textDirection: TextDirection.rtl,
+                  ),
+                ],
+              ),
             ),
           );
         },

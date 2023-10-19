@@ -1,10 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:city_app/model/model.dart';
-import 'package:city_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
 // Import carousel_slider package
 
 class MapScreen8 extends StatefulWidget {
@@ -111,11 +112,7 @@ class _MapScreenState extends State<MapScreen8> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          backgroundColor: KmainColor,
-          onPressed: _toggleRotation,
-          child: Icon(
-            Icons.rotate_right_outlined,
-          )),
+          onPressed: _toggleRotation, child: Icon(Icons.rotate_right_outlined)),
       body: Column(
         children: [
           Expanded(
@@ -127,7 +124,7 @@ class _MapScreenState extends State<MapScreen8> {
                   subdomains: ['a', 'b', 'c'],
                 ),
                 MarkerLayer(
-                  markers: getMarker(),
+                  markers: markers,
                   rotate: true,
                 ),
                 PolygonLayer(
@@ -135,7 +132,7 @@ class _MapScreenState extends State<MapScreen8> {
                     Polygon(
                       points: polygonCoordinates,
                       borderStrokeWidth: 2,
-                      borderColor: KmainColor,
+                      borderColor: Colors.blue,
                     ),
                   ],
                 ),
@@ -154,44 +151,52 @@ class _MapScreenState extends State<MapScreen8> {
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: CarouselSlider(
+              //implement number of places
               items: [1, 2, 3, 4, 5].map((i) {
-                // Replace with your items
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                return Card(
+                  child: Column(
+                    children: [
+                      Row(
                         children: [
-                          Expanded(
-                              child: Image.asset(
-                            'assets/images/p.jpeg',
-                            scale: 5,
-                          )), // Replace 'your_image.png' with the image path
-                          SizedBox(height: 10), // Adjust the spacing as needed
-                          Expanded(
-                            child: Center(
-                              child: Text(
-                                'Item $i',
-                                style: TextStyle(fontSize: 16.0),
+                          Container(
+                              width: 150,
+                              height: 150,
+                              child: Image(
+                                  image: NetworkImage(
+                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIhD3APKrppJ5DzTdlKnMeGtmwJo8eU2qJfg&usqp=CAU'))),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Name',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
+                              Text(
+                                'description',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.black),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    );
-                  },
+                      //name of places created on model
+                      //
+                    ],
+                  ),
                 );
               }).toList(),
               options: CarouselOptions(
+                height: 180,
                 aspectRatio: 70 / 7,
-                viewportFraction: 1,
-                autoPlay: true,
+                viewportFraction: 1.0,
+                enableInfiniteScroll: false,
               ),
             ),
           )

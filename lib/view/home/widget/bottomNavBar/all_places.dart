@@ -1,4 +1,5 @@
 import 'package:city_app/utils/constants.dart';
+import 'package:city_app/view/home/widget/home_info.dart';
 import 'package:city_app/view/screen_three.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class AllPlacesScreen extends StatelessWidget {
         itemBuilder: (context, int index) {
           return GestureDetector(
             onTap: () {
-              Get.to(() => Screen3());
+              Get.to(() => PlaceTap());
             },
             child: Card(
               elevation: 5,

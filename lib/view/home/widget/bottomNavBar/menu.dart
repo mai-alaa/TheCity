@@ -1,3 +1,4 @@
+import 'package:city_app/controller/controller.dart';
 import 'package:city_app/utils/componnents.dart';
 import 'package:city_app/view/home/widget/bottomNavBar/menu/news_info.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class MenuScreen extends StatelessWidget {
-  const MenuScreen({super.key});
+  MenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

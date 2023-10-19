@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:city_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,9 +51,18 @@ class Screen3 extends StatelessWidget {
             Row(
               children: [
                 Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: MediaQuery.sizeOf(context).width * 0.57,
-                    child: Image.asset('assets/images/p.jpg')),
+                  width: MediaQuery.sizeOf(context).width,
+                  height: MediaQuery.sizeOf(context).width * 0.57,
+                  child: CachedNetworkImage(
+                    // Use CachedNetworkImage widget
+                    imageUrl:
+                        'https://th.bing.com/th/id/OIP.ZRezH8rKYvTg2NldhoGMZQHaE6?pid=ImgDet&rs=1', // Replace with your image URL
+                    placeholder: (context, url) =>
+                        CircularProgressIndicator(), // Placeholder widget while image is loading
+                    errorWidget: (context, url, error) => Icon(
+                        Icons.error), // Widget to display in case of an error)
+                  ),
+                )
               ],
             ),
             Padding(

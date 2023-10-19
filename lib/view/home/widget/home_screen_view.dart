@@ -3,12 +3,13 @@ import 'package:city_app/utils/constants.dart';
 
 import 'package:city_app/view/home/widget/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class HomeScreenView extends GetView<Controller> {
-  const HomeScreenView({super.key});
+  HomeScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class HomeScreenView extends GetView<Controller> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.to(SettingPage());
+                Get.to(() => SettingPage());
               },
             ),
           )
