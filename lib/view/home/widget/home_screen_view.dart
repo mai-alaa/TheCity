@@ -15,15 +15,18 @@ class HomeScreenView extends GetView<Controller> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Obx(() => Text(controller.titles[controller.currentIndex.value])),
+        backgroundColor: Colors.white,
+        title: Obx(() => Text(
+              controller.titles[controller.currentIndex.value],
+              style: TextStyle(color: KmainColor, fontWeight: FontWeight.bold),
+            )),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8),
             child: IconButton(
               icon: Icon(
                 Icons.settings,
-                color: Colors.white,
+                color: KmainColor,
               ),
               onPressed: () {
                 Get.to(() => SettingPage());
@@ -32,17 +35,6 @@ class HomeScreenView extends GetView<Controller> {
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: KmainColor,
-        onPressed: () {
-          Get.to(SearchBar());
-        },
-        child: Icon(
-          Icons.search,
-          size: 40.0,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
             //selectedItemColor: const Color.fromARGB(255, 5, 112, 126),
@@ -56,10 +48,10 @@ class HomeScreenView extends GetView<Controller> {
                   label: 'All Places'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.favorite), label: 'Favorites'),
-              BottomNavigationBarItem(
-                icon: SizedBox.shrink(), // Empty SizedBox for the icon
-                label: '',
-              ),
+              // BottomNavigationBarItem(
+              //   icon: SizedBox.shrink(), // Empty SizedBox for the icon
+              //   label: '',
+              // ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.place), label: 'All Map'),
               BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'Menu'),

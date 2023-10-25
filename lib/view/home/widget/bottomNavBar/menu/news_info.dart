@@ -10,13 +10,20 @@ class NewsInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            color: KmainColor,
+          ),
           onPressed: () {
             Get.back();
           },
         ),
-        title: Text('News Info'),
+        title: Text(
+          'News Info',
+          style: TextStyle(fontWeight: FontWeight.bold, color: KmainColor),
+        ),
       ),
       body: ListView.builder(
         itemCount: 20,

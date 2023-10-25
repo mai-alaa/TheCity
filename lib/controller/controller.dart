@@ -12,9 +12,8 @@ class Controller extends GetxController {
   List<Widget> screens = [
     AllPlacesScreen(),
     FavouriteScreen(),
-    SearchBar(),
     MapScreen8(),
     MenuScreen(),
   ];
-  List<String> titles = ['All Places', 'Favorites', 'Search', 'Map', 'Menu'];
+  List<String> titles = ['All Places', 'Favorites', 'Map', 'Menu'];
 }

@@ -113,9 +113,11 @@ class _MapScreenState extends State<MapScreen8> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           onPressed: _toggleRotation, child: Icon(Icons.rotate_right_outlined)),
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
+          Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
             child: FlutterMap(
               children: [
                 TileLayer(
@@ -148,55 +150,68 @@ class _MapScreenState extends State<MapScreen8> {
               mapController: mapController,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: CarouselSlider(
-              //implement number of places
-              items: [1, 2, 3, 4, 5].map((i) {
-                return Card(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                              width: 150,
-                              height: 150,
-                              child: Image(
-                                  image: NetworkImage(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIhD3APKrppJ5DzTdlKnMeGtmwJo8eU2qJfg&usqp=CAU'))),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Name',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'description',
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.black),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      //name of places created on model
-                      //
-                    ],
-                  ),
-                );
-              }).toList(),
-              options: CarouselOptions(
-                height: 180,
-                aspectRatio: 70 / 7,
-                viewportFraction: 1.0,
-                enableInfiniteScroll: false,
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: 10,
+              ),
+              child: CarouselSlider(
+                //implement number of places
+                items: [1, 2, 3, 4, 5].map((i) {
+                  return Card(
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                                width: 150,
+                                height: 150,
+                                child: Padding(
+                                  padding: EdgeInsets.all(3),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image(
+                                      image: NetworkImage(
+                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIhD3APKrppJ5DzTdlKnMeGtmwJo8eU2qJfg&usqp=CAU'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Name',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'description',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        //name of places created on model
+                        //
+                      ],
+                    ),
+                  );
+                }).toList(),
+                options: CarouselOptions(
+                  height: 160,
+                  aspectRatio: 70 / 7,
+                  viewportFraction: .89,
+                  enableInfiniteScroll: false,
+                ),
               ),
             ),
           )

@@ -29,7 +29,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
       if (connectivityResult == ConnectivityResult.wifi ||
           connectivityResult == ConnectivityResult.mobile) {
         // Navigate to the home page
-        Get.off(() => HomeScreen());
+        Get.off(() => const HomeScreen());
       } else {
         Get.defaultDialog(
           title: 'No Internet Connection',
@@ -52,7 +52,6 @@ class _SplashScreenViewState extends State<SplashScreenView> {
         textConfirm: 'Ok',
         onConfirm: () {
           Get.back();
-          // You can also consider exiting the app or showing a message
         },
       );
     }
@@ -61,40 +60,28 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color.fromARGB(255, 5, 112, 126),
+      backgroundColor: Color.fromARGB(255, 2, 29, 102),
       body: Center(
         child: Column(
           //   crossAxisAlignment:CrossAxisAlignment.center ,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: Text(
-                "WELCOME",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 40,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 50.0),
-              child: Center(
-                child: CircleAvatar(
-                  radius: 60,
-                  backgroundImage: AssetImage('assets/images/p.jpg'),
-                ),
-              ),
-            ),
+                child: Image(
+              image: AssetImage('assets/images/m.png'),
+              width: 100,
+              height: 100,
+            )),
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                " You don't have to be a Muslim to support Palestine; ",
-                style: TextStyle(color: Colors.white),
+                " The City ",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 30),
               ),
-            ),
-            Text(
-              "you just have to be human. ",
-              style: TextStyle(color: Colors.white),
             ),
             SizedBox(
               height: 20,
