@@ -1,15 +1,18 @@
 import 'package:city_app/controller/services.dart';
 import 'package:city_app/utils/bindings.dart';
 import 'package:city_app/utils/themes.dart';
-import 'package:city_app/view/home/home_screen.dart';
-import 'package:city_app/view/screen_three.dart';
 import 'package:city_app/view/splash_screen/splash_screen.dart';
-import 'package:city_app/view/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
