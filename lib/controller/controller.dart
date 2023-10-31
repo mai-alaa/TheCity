@@ -15,20 +15,6 @@ class Controller extends GetxController {
 
   String? get openId => box.read("openId");
 
-  Future<void> signIn() async {
-    try {
-      final userCredential = await FirebaseAuth.instance.signInAnonymously();
-      user.value = userCredential.user;
-      String? userId = userCredential.user?.uid;
-
-      if (userId != null) {
-        box.write("openId", userId);
-      }
-    } catch (e) {
-      print("Error signing in: $e");
-    }
-  }
-
   List<Widget> screens = [
     AllPlacesScreen(),
     FavouriteScreen(),
@@ -36,4 +22,17 @@ class Controller extends GetxController {
     MenuScreen(),
   ];
   List<String> titles = ['All Places', 'Favorites', 'Map', 'Menu'];
+
+  Future<void> signIn() async {
+    try {
+      final userCredential = await FirebaseAuth.instance.signInAnonymously();
+      user.value = userCredential.user;
+      String? userId = userCredential.user?.uid;
+      if (userId != null) {
+        box.write("openId", userId);
+      }
+    } catch (e) {
+      print("Error signing in: $e");
+    }
+  }
 }

@@ -1,9 +1,10 @@
 import 'package:city_app/controller/controller.dart';
 import 'package:city_app/view/home/home_screen.dart';
+import 'package:city_app/view/loginScreen/login_screen.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:location/location.dart';
+
 import 'package:permission_handler/permission_handler.dart';
 
 class SplashScreenView extends StatefulWidget {
@@ -28,8 +29,11 @@ class _SplashScreenViewState extends State<SplashScreenView> {
       final connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult == ConnectivityResult.wifi ||
           connectivityResult == ConnectivityResult.mobile) {
-        // Navigate to the home page
-        Get.off(() => const HomeScreen());
+        if (Controller().openId == null) {
+          Get.off(() => LoginScreen());
+        } else {
+          Get.off(() => const HomeScreen());
+        }
       } else {
         Get.defaultDialog(
           title: 'No Internet Connection',
