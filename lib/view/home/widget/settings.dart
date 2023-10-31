@@ -1,4 +1,5 @@
 import 'package:city_app/controller/controller.dart';
+import 'package:city_app/utils/componnents.dart';
 import 'package:city_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -314,6 +315,24 @@ class SettingPage extends StatelessWidget {
                 ),
               ]),
             ),
+            Spacer(),
+            GestureDetector(
+              onTap: () {
+                controller.signOut();
+              },
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: Container(
+                  height: MediaQuery.sizeOf(context).height * .050,
+                  width: MediaQuery.sizeOf(context).width,
+                  decoration: BoxDecoration(
+                    color: KmainColor,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: Center(child: Text('Sign Out')),
+                ),
+              ),
+            )
           ],
         ),
       ),

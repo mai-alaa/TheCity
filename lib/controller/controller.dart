@@ -2,6 +2,8 @@ import 'package:city_app/view/home/widget/bottomNavBar/all_places.dart';
 import 'package:city_app/view/home/widget/bottomNavBar/all_places_map.dart';
 import 'package:city_app/view/home/widget/bottomNavBar/favourates.dart';
 import 'package:city_app/view/home/widget/bottomNavBar/menu.dart';
+import 'package:city_app/view/splash_screen/splash_screen.dart';
+import 'package:city_app/view/splash_screen/widgets/spalsh_screen_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,6 +35,18 @@ class Controller extends GetxController {
       }
     } catch (e) {
       print("Error signing in: $e");
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      user.value = null;
+      box.remove("openId"); // Remove OpenID from storage
+      Get.offAll(() =>
+          SplashScreen()); // Navigate to the SplashScreen or any other screen
+    } catch (e) {
+      print("Error signing out: $e");
     }
   }
 }
